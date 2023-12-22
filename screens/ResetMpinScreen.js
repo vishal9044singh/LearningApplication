@@ -39,8 +39,8 @@ export default function ResetMpinScreen() {
         <View className="flex-row justify-start">
         </View>
         <View className="flex-row justify-center">
-          <Image source={require('../assets/images/login.png')}
-            style={{ width: 200, height: 200 }} />
+          {/* <Image source={require('../assets/images/login.png')}
+            style={{ width: 200, height: 200 }} /> */}
         </View>
       </SafeAreaView>
       <View style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50, minHeight: 500}} className="flex-1 bg-white px-8 pt-8">

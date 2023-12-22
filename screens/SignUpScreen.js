@@ -12,8 +12,8 @@ export default function SignUpScreen() {
         <ScrollView className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
             <SafeAreaView className="flex">
                 <View className="flex-row justify-center">
-                    <Image source={require('../assets/images/signup.png')}
-                        style={{ width: 165, height: 110 }} />
+                    {/* <Image source={require('../assets/images/signup.png')}
+                        style={{ width: 165, height: 110 }} /> */}
                 </View>
             </SafeAreaView>
             <View className="flex-1 bg-white px-8 pt-8"

@@ -10,9 +10,16 @@ export default function HomeScreen() {
     console.log('value of user is', user)
   }
   return (
-    <SafeAreaView>
-      <Text>This is Home Screen</Text>
-      <Button title='Logout' onPress={handleLogout} />
-    </SafeAreaView>
+    <View>
+
+
+      <View>
+        
+        <Image style={{}} source={{ uri: 'https://youtub' }} />
+
+        
+      </View>
+
+    </View>
   )
 }

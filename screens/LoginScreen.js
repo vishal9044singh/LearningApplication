@@ -1,11 +1,9 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
-import React, { useRef, useContext } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { ArrowLeftIcon } from 'react-native-heroicons/solid';
-import { themeColors } from '../theme'
+import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import React, { useRef, useContext } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
-import { UserContext } from '../context/userContext'
-
+import { UserContext } from '../context/userContext';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -20,8 +18,8 @@ export default function LoginScreen() {
         <View className="flex-row justify-start">
         </View>
         <View className="flex-row justify-center">
-          <Image source={require('../assets/images/login.png')}
-            style={{ width: 200, height: 200 }} />
+          {/* <Image source={require('../assets/images/login.png')}
+            style={{ width: 200, height: 200 }} /> */}
         </View>
       </SafeAreaView>
 
