@@ -17,7 +17,7 @@ export default function AppNavigation() {
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#877dfa' }, headerShadowVisible: false }}>
         {!user ? (
           <>
-            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="ResetMpinScreen" component={ResetMpinScreen} />
