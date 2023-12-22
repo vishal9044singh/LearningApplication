@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { View, Text, Button } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, Text, Button, Image } from "react-native";
 import { UserContext } from "../context/userContext";
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -9,17 +9,10 @@ export default function HomeScreen() {
     setUser(false);
     console.log('value of user is', user)
   }
+
   return (
     <View>
-
-
-      <View>
-        
-        <Image style={{}} source={{ uri: 'https://youtub' }} />
-
-        
-      </View>
-
+      <Text>This is HomeScreen</Text>
     </View>
   )
 }

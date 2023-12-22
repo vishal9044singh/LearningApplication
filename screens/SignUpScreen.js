@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView,StyleSheet } from 'react-native';
 import React from 'react'
 import { themeColors } from '../theme'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -7,89 +7,45 @@ import { useNavigation } from '@react-navigation/native';
 
 // subscribe for more videos like this :)
 export default function SignUpScreen() {
+
     const navigation = useNavigation();
     return (
-        <ScrollView className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
-            <SafeAreaView className="flex">
+        <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
+            <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
+                <Text className='text-center text-2xl font-bold' style={{color:themeColors.bgBold}}>Sign Up</Text>
                 <View className="flex-row justify-center">
-                    {/* <Image source={require('../assets/images/signup.png')}
-                        style={{ width: 165, height: 110 }} /> */}
+                    <Image source={require('../assets/student.png')}
+                        style={{ width: 250, height: 250 }} 
+                        />
                 </View>
-            </SafeAreaView>
-            <View className="flex-1 bg-white px-8 pt-8"
-                style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
-            >
-                <View className="form space-y-2">
-                    <Text className="text-gray-700 ml-4">Full Name:</Text>
+                <View className="form space-y-2 ">
+                    <Text className="text-gray-700 mb-1">Enter your name and mobile number</Text>
                     <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+                        className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
                         // value="john snow"
-                        placeholder='Enter Name...'
+                        placeholder='Enter Name'
                     />
-                    <Text className="text-gray-700 ml-4">Mobile Number:</Text>
                     <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+                        className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3"
                         // value="john@gmail.com"
-                        placeholder='Enter Mobile Number...'
+                        placeholder='Enter Mobile Number'
                     />
-                    <Text className="text-gray-700 ml-4">Email Address:</Text>
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-                        // value="john@gmail.com"
-                        placeholder='Enter Email'
-                    />
-                    <Text className="text-gray-700 ml-4">Address:</Text>
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // value="test12345"
-                        placeholder='Line 1...'
-                    />
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // value="test12345"
-                        placeholder='Line 2...'
-                    />
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // value="test12345"
-                        placeholder='City...'
-                    />
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // secureTextEntry
-                        // value="test12345"
-                        placeholder='Dist...'
-                    />
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // value="test12345"
-                        placeholder='State...'
-                    />
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // value="test12345"
-                        placeholder='Country...'
-                    />
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-2xl mb-1"
-                        // value="test12345"
-                        placeholder='Pincode...'
-                    />
-                    <TouchableOpacity
-                        className="py-4 bg-yellow-400 rounded-xl"
+                    <TouchableOpacity activeOpacity={0.9}
+                        className="py-3 mt-6 rounded-full"
+                        style={{backgroundColor:themeColors.bg}}
                     >
-                        <Text className="font-xl font-bold text-center text-gray-700">
-                            Sign Up
+                        <Text className="font-xl text-center text-white">
+                            Next
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View className="flex-row justify-center mt-7">
-                    <Text className="text-gray-500 font-semibold mb-5">Already have an account?</Text>
+                <View className="flex-row justify-center py-12">
+                    <Text className="text-gray-500 font-semibold mb-5" style={{color:themeColors.bgBold}}>Don't have a account?</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                        <Text className="font-semibold text-yellow-500"> Login</Text>
+                        <Text className="font-bold" style={{ color: themeColors.bg }}> Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-        </ScrollView>
+        </View>
     )
 }
