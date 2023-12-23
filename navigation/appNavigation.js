@@ -19,7 +19,7 @@ export default function AppNavigation() {
     return (
       <Image
         style={{ width: 35, height: 35 }}
-        source={require('../assets/student.png')} // Replace with the path to your logo
+        source={require('../assets/logo/topLogo/desktop.png')} // Replace with the path to your logo
         resizeMode="contain"
       />
     );

@@ -13,9 +13,9 @@ export default function SignUpScreen() {
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
             <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
                 <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Sign Up</Text>
-                <View className="flex-row justify-center">
-                    <Image source={require('../assets/student.png')}
-                        style={{ width: 250, height: 250 }}
+                <View className="flex-row justify-center mt-6">
+                    <Image source={require('../assets/images/signup/desktop.png')}
+                        style={{ width: 250,height: 250 }}
                     />
                 </View>
                 <View className="form space-y-2 ">
