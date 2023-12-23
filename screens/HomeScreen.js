@@ -1,18 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { View, Text, Button, Image } from "react-native";
 import { UserContext } from "../context/userContext";
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { themeColors } from "../theme";
 
 export default function HomeScreen() {
   const { user, setUser } = useContext(UserContext);
-  const handleLogout = () => {
-    setUser(false);
-    console.log('value of user is', user)
-  }
 
   return (
-    <View>
-      <Text>This is HomeScreen</Text>
+    <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
+      <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
+        <Text>This is Home Screen</Text>
+      </View>
     </View>
   )
 }

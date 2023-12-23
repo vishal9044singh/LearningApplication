@@ -26,6 +26,10 @@ export default function AppNavigation() {
 
   const { user, setUser } = useContext(UserContext);
 
+  useEffect(() => {
+    setUser(false)
+  }, [])
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: themeColors.bg }, headerShadowVisible: false }}>
