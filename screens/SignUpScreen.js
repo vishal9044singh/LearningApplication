@@ -1,16 +1,13 @@
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, StyleSheet } from 'react-native';
 import React, { useState } from 'react'
-import { themeColors } from '../theme'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { ArrowLeftIcon } from 'react-native-heroicons/solid';
+import { View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
+import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 
-// subscribe for more videos like this :)
 export default function SignUpScreen() {
+    const navigation = useNavigation();
+
     const [mobileNumber, setMobileNumber] = useState('');
     const [name, setName] = useState('');
-
-    const navigation = useNavigation();
 
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
