@@ -3,24 +3,35 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { themeColors } from '../theme';
 import OtpInput from '../components/OtpInput';
 import otpStyle from '../assets/css/otpStyle';
+import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../context/userContext';
 import { useRoute } from '@react-navigation/native';
 
 export default function OtpScreen() {
+    const navigation = useNavigation();
     const route = useRoute();
     const { setUser } = useContext(UserContext)
-    const { mobileNumber } = route.params;
+    const { mobileNumber, name, action } = route.params;
     const [otp, setOtp] = useState(['', '', '', '']);
-    console.log('value of mobileNumber is', mobileNumber)
+    console.log('value of mobileNumber is', mobileNumber, name, action)
 
     const handleContinue = () => {
         try {
             console.log('value of otp is', otp.length, mobileNumber)
+            if (action == 'Login') {
+                setUser(true)
+            }
+            else {
+                navigation.navigate('StudentRegistrationScreen', {
+                    mobileNumber: mobileNumber,
+                    name: name,
+                    action: action
+                })
+            }
             //here will send reques to backed and if verified will set user to true and and save token,mobileNumber in localstorage
-            setUser(true)
         }
         catch (error) {
-            console.log('got error in verifying otp')
+            console.log('got error in verifying otp',error)
         }
     }
 

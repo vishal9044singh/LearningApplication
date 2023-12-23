@@ -7,8 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 
 // subscribe for more videos like this :)
 export default function SignUpScreen() {
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [name, setName] = useState('');
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
@@ -34,8 +36,12 @@ export default function SignUpScreen() {
                     <TouchableOpacity activeOpacity={0.9}
                         className="py-3 mt-6 rounded-full"
                         style={{ backgroundColor: themeColors.bg }}
-                        onPress={() => navigation.navigate('OtpScreen')}
-                    >
+                        onPress={() => navigation.navigate('StudentRegistrationScreen',
+                            {
+                                mobileNumber: mobileNumber,
+                                name: 'Vishal',
+                                action:'SignUp'
+                            })}>
                         <Text className="font-xl text-center text-white">
                             Next
                         </Text>

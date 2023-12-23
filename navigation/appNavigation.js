@@ -9,6 +9,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import { UserContext } from '../context/userContext';
 import MpinScreen from '../screens/MpinScreen';
 import OtpScreen from '../screens/OtpScreen';
+import StudentRegistrationScreen from '../screens/StudentRegistrationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ export default function AppNavigation() {
             }} component={SignUpScreen} />
             <Stack.Screen name="MpinScreen" options={{ headerTitle: '' }} component={MpinScreen} />
             <Stack.Screen name="OtpScreen" options={{ headerTitle: '' }} component={OtpScreen} />
+            <Stack.Screen name="StudentRegistrationScreen" options={{ headerTitle: '' }} component={StudentRegistrationScreen} />
           </>
         ) : (
           <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />

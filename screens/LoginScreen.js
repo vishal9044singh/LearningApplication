@@ -17,7 +17,11 @@ export default function LoginScreen() {
 
       //request for sending otp
       if (mobileNumber === '9453998123') {
-        navigation.navigate('OtpScreen', { mobileNumber });
+        navigation.navigate('OtpScreen',
+          {
+            mobileNumber: mobileNumber,
+            action: 'Login'
+          });
       }
 
     }
