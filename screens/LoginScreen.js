@@ -30,7 +30,9 @@ export default function LoginScreen() {
             style={styles.inputBox}
             placeholder='Mobile Number'
           />
-          <TouchableOpacity activeOpacity={0.9} className="py-3 mt-6 rounded-full" style={{ backgroundColor: themeColors.bg }} >
+          <TouchableOpacity activeOpacity={0.9} className="py-3 mt-6 rounded-full" style={{ backgroundColor: themeColors.bg }} 
+           onPress={()=>navigation.navigate('OtpScreen')}
+           >
             <Text className="font-xl text-center text-white">
               Login
             </Text>
@@ -43,13 +45,15 @@ export default function LoginScreen() {
           <Text style={login.orText}>or</Text>
         </View>
 
-        <View className='mt-4' style={login.mpin}>
-          <Entypo name="key" size={24} color="black" />
-          <Text className='font-bold'> Login With MPIN</Text>
+        <View className='mt-3' style={login.mpin}>
+          <Entypo name="key" size={24} color={themeColors.bg} />
+          <TouchableOpacity onPress={()=>navigation.navigate('MpinScreen')} activeOpacity={0.9}>
+          <Text className='font-bold' style={{ color: themeColors.bg }}> Login With MPIN</Text>
+          </TouchableOpacity>
         </View>
 
         <View className="flex-row justify-center py-12">
-          <Text className="text-gray-500 font-semibold mb-5" style={{ color: themeColors.bgBold }}>Don't have a account?</Text>
+          <Text className="text-gray-500 font-bold mb-5" style={{ color: themeColors.bgBold }}>Don't have a account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')} activeOpacity={0.9}>
             <Text className="font-bold" style={{ color: themeColors.bg }}> Sign Up Now</Text>
           </TouchableOpacity>

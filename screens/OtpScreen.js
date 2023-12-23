@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { themeColors } from '../theme';
+import OtpInput from '../components/OtpInput';
+import otpStyle from '../assets/css/otpStyle';
+
+export default function OtpScreen() {
+    const [otp, setOtp] = useState(['', '', '', '']);
+
+    const handleLogin = () => {
+        console.log('value of otp is', otp)
+        //here will send reques to backed and if verified will navigate to next screen
+    }
+
+    return (
+        <View className="flex-1" style={{ backgroundColor: themeColors.bg }}>
+            <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
+                <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Verification</Text>
+                <View className='p-2 mt-12'>
+                    <Text className="text-gray-700 mb-3">Enter the OTP you recived</Text>
+                    <OtpInput otp={otp} setOtp={setOtp} />
+                    <View style={otpStyle.otpText}>
+                        <Text className="text-gray-700">You should receive the otp in</Text>
+                        <Text style={{ color: themeColors.bg }}> 30 Second</Text>
+                    </View>
+                    <TouchableOpacity activeOpacity={0.9} className="py-3 mt-6 rounded-full" style={{ backgroundColor: themeColors.bg }}
+                        onPress={handleLogin}>
+                        <Text className="font-xl text-center text-white">Continue</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    );
+};

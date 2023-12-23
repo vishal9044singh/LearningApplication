@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { themeColors } from "../../theme";
 
 export default login = StyleSheet.create({
     mpin:{
@@ -23,8 +24,8 @@ export default login = StyleSheet.create({
         paddingHorizontal: 5,
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#004260',
+        color: themeColors.bgBold,
         position: 'absolute',
         zIndex: 1,
-      },
+      }
 })
