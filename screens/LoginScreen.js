@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo } from '@expo/vector-icons';
 import { themeColors } from '../theme';
@@ -10,9 +10,22 @@ import login from '../assets/css/login';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
-  const mobileNuberRef = useRef(null);
-  const mpinRef = useRef(null);
-  const { setUser } = useContext(UserContext)
+  const [mobileNumber,setMobileNumber]=useState('');
+
+  const hitSendOtp = async () => {
+    try {
+
+      //request for sending otp
+      if (mobileNumber === '9453998123') {
+        navigation.navigate('OtpScreen', { mobileNumber });
+      }
+
+    }
+    catch (error) {
+      console.error('Error sending OTP:', error);
+    }
+  }
+  
 
   return (
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
@@ -28,11 +41,13 @@ export default function LoginScreen() {
           <TextInput
             className="p-2 text-gray-700 rounded-md mb-4"
             style={styles.inputBox}
+            keyboardType='numeric'
+            maxLength={10}
+            onChangeText={(text) => setMobileNumber(text)}
             placeholder='Mobile Number'
           />
-          <TouchableOpacity activeOpacity={0.9} className="py-3 mt-6 rounded-full" style={{ backgroundColor: themeColors.bg }} 
-           onPress={()=>navigation.navigate('OtpScreen')}
-           >
+          <TouchableOpacity activeOpacity={0.9} className="py-3 mt-6 rounded-full" style={{ backgroundColor: themeColors.bg }}
+            onPress={hitSendOtp}>
             <Text className="font-xl text-center text-white">
               Login
             </Text>
@@ -46,8 +61,8 @@ export default function LoginScreen() {
 
         <View className='mt-3' style={login.mpin}>
           <Entypo name="key" size={24} color={themeColors.bg} />
-          <TouchableOpacity onPress={()=>navigation.navigate('MpinScreen')} activeOpacity={0.9}>
-          <Text className='font-bold' style={{ color: themeColors.bg }}> Login With MPIN</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('MpinScreen')} activeOpacity={0.9}>
+            <Text className='font-bold' style={{ color: themeColors.bg }}> Login With MPIN</Text>
           </TouchableOpacity>
         </View>
 

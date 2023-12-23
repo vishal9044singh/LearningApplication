@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { themeColors } from '../theme';
 import OtpInput from '../components/OtpInput';
 import otpStyle from '../assets/css/otpStyle';
+import { UserContext } from '../context/userContext';
+import { useRoute } from '@react-navigation/native';
 
 export default function OtpScreen() {
+    const route = useRoute();
+    const { setUser } = useContext(UserContext)
+    const { mobileNumber } = route.params;
     const [otp, setOtp] = useState(['', '', '', '']);
+    console.log('value of mobileNumber is', mobileNumber)
 
-    const handleLogin = () => {
-        console.log('value of otp is', otp)
-        //here will send reques to backed and if verified will navigate to next screen
+    const handleContinue = () => {
+        try {
+            console.log('value of otp is', otp.length, mobileNumber)
+            //here will send reques to backed and if verified will set user to true and and save token,mobileNumber in localstorage
+            setUser(true)
+        }
+        catch (error) {
+            console.log('got error in verifying otp')
+        }
     }
 
     return (
@@ -24,7 +36,7 @@ export default function OtpScreen() {
                         <Text style={{ color: themeColors.bg }}> 30 Second</Text>
                     </View>
                     <TouchableOpacity activeOpacity={0.9} className="py-3 mt-6 rounded-full" style={{ backgroundColor: themeColors.bg }}
-                        onPress={handleLogin}>
+                        onPress={handleContinue}>
                         <Text className="font-xl text-center text-white">Continue</Text>
                     </TouchableOpacity>
                 </View>
