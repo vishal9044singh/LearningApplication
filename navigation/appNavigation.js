@@ -6,7 +6,6 @@ import { themeColors } from '../theme';
 import { Image } from 'react-native';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import ResetMpinScreen from '../screens/ResetMpinScreen';
 import { UserContext } from '../context/userContext';
 import MpinScreen from '../screens/MpinScreen';
 import OtpScreen from '../screens/OtpScreen';
@@ -27,10 +26,6 @@ export default function AppNavigation() {
 
   const { user, setUser } = useContext(UserContext);
 
-  useEffect(() => {
-    setUser(false)
-  }, [])
-
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: themeColors.bg }, headerShadowVisible: false }}>
@@ -50,7 +45,6 @@ export default function AppNavigation() {
             }} component={SignUpScreen} />
             <Stack.Screen name="MpinScreen" options={{ headerTitle: '' }} component={MpinScreen} />
             <Stack.Screen name="OtpScreen" options={{ headerTitle: '' }} component={OtpScreen} />
-            <Stack.Screen name="ResetMpinScreen" component={ResetMpinScreen} />
           </>
         ) : (
           <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />

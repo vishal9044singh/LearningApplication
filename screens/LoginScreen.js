@@ -39,7 +39,6 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* here i want a horzontal line with or at the center */}
         <View style={login.horizontalLineContainer}>
           <View style={login.horizontalLine} />
           <Text style={login.orText}>or</Text>

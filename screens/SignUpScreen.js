@@ -42,7 +42,7 @@ export default function SignUpScreen() {
                     </TouchableOpacity>
                 </View>
                 <View className="flex-row justify-center py-12">
-                    <Text className="text-gray-500 font-bold mb-5" style={{color:themeColors.bgBold}}>Don't have a account?</Text>
+                    <Text className="text-gray-500 font-bold mb-5" style={{color:themeColors.bgBold}}>Already have a account?</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                         <Text className="font-bold" style={{ color: themeColors.bg }}> Login</Text>
                     </TouchableOpacity>
