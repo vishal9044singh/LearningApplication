@@ -42,7 +42,6 @@ export default function AppNavigation() {
       <Stack.Navigator 
       screenOptions={{ headerStyle: { backgroundColor: themeColors.bg }, 
       headerShadowVisible: false ,
-      headerTitle: (props) => <LogoTitle {...props} />,
       headerLeft: (props) => <CustomBackButton {...props} />,
       }}>
         {!user ? (
@@ -54,6 +53,7 @@ export default function AppNavigation() {
               headerTitleAlign: 'center',
               headerLeft: null,
             }} component={LoginScreen} />
+
             <Stack.Screen name="SignUp" options={{
               headerTitle: '',
               headerBackVisible: false,
@@ -61,14 +61,63 @@ export default function AppNavigation() {
               headerLeft: null,
               headerTitleAlign: 'center',
             }} component={SignUpScreen} />
-            <Stack.Screen name="MpinScreen" options={{ headerTitle: '' }} component={MpinScreen} />
-            <Stack.Screen name="OtpScreen" options={{ headerTitle: '' }} component={OtpScreen} />
-            <Stack.Screen name="Email" options={{ headerTitle: '' }} component={Email} />
-            <Stack.Screen name="MPin" options={{ headerTitle: '' }} component={Mpin} />
-            <Stack.Screen name="ConfirmMpin" options={{ headerTitle: '' }} component={ConfirmMpin} />
-            <Stack.Screen name="TermsAndConditions" options={{ headerTitle: '' }} component={TermsAndConditions} />
-            <Stack.Screen name="Address" options={{ headerTitle: '' }} component={Address} />
-            <Stack.Screen name="CBMSDetails" options={{ headerTitle: '' }} component={CBMSDetails} />
+
+            <Stack.Screen name="MpinScreen" options={{
+               headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+               }} component={MpinScreen} />
+
+            <Stack.Screen name="OtpScreen" options={{
+               headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+               }} component={OtpScreen} />
+
+            <Stack.Screen name="Email" options={{ 
+              headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+          }} component={Email} />
+
+            <Stack.Screen name="MPin" options={{ 
+              headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+               }} component={Mpin} />
+
+            <Stack.Screen name="ConfirmMpin" options={{
+               headerTitle: '',
+               headerBackVisible: false,
+               headerTitle: (props) => <LogoTitle {...props} />,
+               headerTitleAlign: 'center',
+               }} component={ConfirmMpin} />
+
+            <Stack.Screen name="Address" options={{
+              headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+            }} component={Address} />
+
+            <Stack.Screen name="CBMSDetails" options={{
+              headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+            }} component={CBMSDetails} />
+
+            <Stack.Screen name="TermsAndConditions" options={{
+              headerTitle: '',
+              headerBackVisible: false,
+              headerTitle: (props) => <LogoTitle {...props} />,
+              headerTitleAlign: 'center',
+            }}
+              component={TermsAndConditions} />
           </>
         ) : (
           <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />

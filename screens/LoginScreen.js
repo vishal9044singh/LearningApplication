@@ -45,7 +45,6 @@ export default function LoginScreen() {
           <TextInput
             className="p-2 text-gray-700 rounded-md mb-4"
             style={styles.inputBox}
-            keyboardType='numeric'
             maxLength={10}
             onChangeText={(text) => setMobileNumber(text)}
             placeholder='Mobile Number'

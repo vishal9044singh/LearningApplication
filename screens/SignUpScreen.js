@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { View, Text, TouchableOpacity, Image, TextInput,Alert } from 'react-native';
+import React, {useContext} from 'react'
+import { View, Text, TouchableOpacity, Image, TextInput,Alert} from 'react-native';
 import { themeColors } from '../theme';
 import { SignUpContext } from '../context/signupContext'
 import { useNavigation } from '@react-navigation/native';
@@ -46,7 +46,6 @@ export default function SignUpScreen() {
                     <TextInput
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3"
                         style={styles.inputBox}
-                        keyboardType='numeric'
                         value={signUpData.mobileNumber}
                         onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, mobileNumber: text }))}
                         placeholder='Enter Mobile Number'
