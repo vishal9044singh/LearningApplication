@@ -25,7 +25,7 @@ export default function CustomBackButton() {
                     },
                     {
                         text: 'OK',
-                        onPress: navigateToSignUp 
+                        onPress: navigateToSignUp
                     },
                 ]);
             }
@@ -38,7 +38,6 @@ export default function CustomBackButton() {
         }
     }
 
-    console.log('value of navigation is', navigation)
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={handleBack}>
             <Image source={require('../assets/icons/arrowLeft/desktop.png')} style={{ width: 15, height: 15, marginLeft: 10 }} />

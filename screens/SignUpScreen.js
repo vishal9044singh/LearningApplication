@@ -46,6 +46,7 @@ export default function SignUpScreen() {
                     <TextInput
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3"
                         style={styles.inputBox}
+                        keyboardType='numeric'
                         value={signUpData.mobileNumber}
                         onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, mobileNumber: text }))}
                         placeholder='Enter Mobile Number'

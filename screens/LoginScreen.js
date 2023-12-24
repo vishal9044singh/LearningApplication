@@ -35,12 +35,12 @@ export default function LoginScreen() {
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
       <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
         <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Login</Text>
-        <View className="flex-row justify-center mt-6">
-        <Image source={require('../assets/images/signup/desktop.png')}
+        <View className="flex-row justify-center mt-5">
+        <Image source={require('../assets/images/login/desktop.png')}
             style={{ width: 250, height: 250 }}
           />
         </View>
-        <View className="form space-y-2 mt-2">
+        <View className="form space-y-2 mt-4">
           <Text className="mb-1" style={{color:themeColors.formHeading}}>Enter your mobile number</Text>
           <TextInput
             className="p-2 text-gray-700 rounded-md mb-4"

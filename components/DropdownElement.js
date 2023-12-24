@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 import { StyleSheet } from "react-native";
+import { SignUpContext } from '../context/signupContext';
+import { useContext } from 'react';
 import { themeColors } from '../theme';
 
-export default function DropdownElement({ data }) {
-    const [value, setValue] = useState(null);
+export default function DropdownElement({ data,dataType }) {
+    const { signUpData, setSignUpData } = useContext(SignUpContext)
     return (
         <Dropdown
             style={dropdownStyle.dropdown}
@@ -17,9 +19,8 @@ export default function DropdownElement({ data }) {
             labelField="label"
             valueField="value"
             placeholder="Select item"
-            value={value}
             onChange={item => {
-                setValue(item.value);
+                setSignUpData((prevData) => ({ ...prevData, [dataType]:item.value }))
             }}
         />
     )
