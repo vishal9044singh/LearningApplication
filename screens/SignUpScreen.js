@@ -19,7 +19,7 @@ export default function SignUpScreen() {
                     />
                 </View>
                 <View className="form space-y-2 ">
-                    <Text className="text-gray-700 mb-1">Enter your name and mobile number</Text>
+                    <Text className="mb-1" style={{color:themeColors.formHeading}}>Enter your name and mobile number</Text>
                     <TextInput
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
                         style={styles.inputBox}

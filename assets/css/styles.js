@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
+import { themeColors } from "../../theme";
 
 export default styles = StyleSheet.create({
     inputBox: {
-        backgroundColor: 'white',
+        backgroundColor: themeColors.inputBackground,
         elevation: 5,
     },
     dropdownHeading:{

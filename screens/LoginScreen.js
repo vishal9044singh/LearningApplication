@@ -41,7 +41,7 @@ export default function LoginScreen() {
           />
         </View>
         <View className="form space-y-2 mt-2">
-          <Text className="text-gray-700 mb-1">Enter your mobile number</Text>
+          <Text className="mb-1" style={{color:themeColors.formHeading}}>Enter your mobile number</Text>
           <TextInput
             className="p-2 text-gray-700 rounded-md mb-4"
             style={styles.inputBox}
@@ -70,8 +70,8 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="flex-row justify-center py-12">
-          <Text className="text-gray-500 font-bold mb-5" style={{ color: themeColors.bgBold }}>Don't have a account?</Text>
+        <View className="flex-row justify-center py-8">
+          <Text className="text-gray-500 font-bold" style={{ color: themeColors.bgBold }}>Don't have a account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')} activeOpacity={0.9}>
             <Text className="font-bold" style={{ color: themeColors.bg }}> Sign Up Now</Text>
           </TouchableOpacity>
