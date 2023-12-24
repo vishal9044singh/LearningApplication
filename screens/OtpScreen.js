@@ -22,7 +22,7 @@ export default function OtpScreen() {
                 setUser(true)
             }
             else {
-                navigation.navigate('StudentRegistrationScreen', {
+                navigation.navigate('Email', {
                     mobileNumber: mobileNumber,
                     name: name,
                     action: action
@@ -40,7 +40,7 @@ export default function OtpScreen() {
             <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
                 <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Verification</Text>
                 <View className='p-2 mt-12'>
-                    <Text className="text-gray-700 mb-3">Enter the OTP you recived</Text>
+                    <Text className="text-gray-700 mb-3">Enter the OTP you received</Text>
                     <OtpInput otp={otp} setOtp={setOtp} />
                     <View style={otpStyle.otpText}>
                         <Text className="text-gray-700">You should receive the otp in</Text>

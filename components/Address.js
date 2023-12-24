@@ -1,11 +1,14 @@
 import { View, Text,Image,TextInput,TouchableOpacity } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 import signup from "../assets/css/signup";
-
 import { themeColors } from "../theme";
+
 export default function Address() {
+    const navigation = useNavigation();
     return (
-        <>
+        <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
+        <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
             <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Sign Up</Text>
             <View className="form space-y-2">
                 <View style={signup.location}>
@@ -50,6 +53,7 @@ export default function Address() {
                     placeholder='Pincode'
                 />
                 <TouchableOpacity activeOpacity={0.9}
+                onPress={()=>navigation.navigate('MPin')}
                     className="py-3 mt-6 rounded-full"
                     style={{ backgroundColor: themeColors.bg }}>
                     <Text className="font-xl text-center text-white">
@@ -57,6 +61,7 @@ export default function Address() {
                     </Text>
                 </TouchableOpacity>
             </View>
-        </>
+        </View>
+        </View>
     )
 }

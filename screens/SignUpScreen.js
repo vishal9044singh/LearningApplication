@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
 import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 
@@ -33,7 +33,7 @@ export default function SignUpScreen() {
                     <TouchableOpacity activeOpacity={0.9}
                         className="py-3 mt-6 rounded-full"
                         style={{ backgroundColor: themeColors.bg }}
-                        onPress={() => navigation.navigate('StudentRegistrationScreen',
+                        onPress={() => navigation.navigate('OtpScreen',
                             {
                                 mobileNumber: mobileNumber,
                                 name: 'Vishal',
