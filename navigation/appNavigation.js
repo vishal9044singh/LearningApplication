@@ -42,6 +42,7 @@ export default function AppNavigation() {
       <Stack.Navigator 
       screenOptions={{ headerStyle: { backgroundColor: themeColors.bg }, 
       headerShadowVisible: false ,
+      headerTitle: (props) => <LogoTitle {...props} />,
       headerLeft: (props) => <CustomBackButton {...props} />,
       }}>
         {!user ? (

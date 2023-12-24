@@ -25,12 +25,32 @@ export const SignUpContextProvider = ({ children }) => {
         subject: '',
     });
 
-    const handleChange = () => {
-
-    }
+    const clearSignUpData = () => {
+        setSignUpData({
+            name: '',
+            mobileNumber: '',
+            otp: '',
+            emailId: '',
+            address: {
+                line1: '',
+                line2: '',
+                city: '',
+                district: '',
+                state: '',
+                country: '',
+                pincode: '',
+            },
+            mpin: '',
+            confirmMpin: '',
+            class: '',
+            board: '',
+            medium: '',
+            subject: '',
+        });
+    };
 
     return (
-        <SignUpContext.Provider value={{ signUpData, setSignUpData }} >
+        <SignUpContext.Provider value={{ signUpData, setSignUpData, clearSignUpData }} >
             {children}
         </SignUpContext.Provider>
     )

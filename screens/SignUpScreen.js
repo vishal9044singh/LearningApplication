@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Image, TextInput,Alert } from 'react-native';
 import { themeColors } from '../theme';
 import { SignUpContext } from '../context/signupContext'
@@ -6,10 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function SignUpScreen() {
     const navigation = useNavigation();
-    const { signUpData, setSignUpData } = useContext(SignUpContext)
-
-    const [mobileNumber, setMobileNumber] = useState('');
-    const [name, setName] = useState('');
+    const { signUpData, setSignUpData,clearSignUpData } = useContext(SignUpContext)
 
     const handleNext = () => {
         try {
@@ -43,11 +40,13 @@ export default function SignUpScreen() {
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
                         style={styles.inputBox}
                         onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, name: text }))}
+                        value={signUpData.name}
                         placeholder='Enter Name'
                     />
                     <TextInput
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3"
                         style={styles.inputBox}
+                        value={signUpData.mobileNumber}
                         onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, mobileNumber: text }))}
                         placeholder='Enter Mobile Number'
                     />
