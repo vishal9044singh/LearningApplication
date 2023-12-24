@@ -1,37 +1,39 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { themeColors } from '../theme';
 import OtpInput from '../components/OtpInput';
 import otpStyle from '../assets/css/otpStyle';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../context/userContext';
 import { useRoute } from '@react-navigation/native';
+import { SignUpContext } from '../context/signupContext';
 
 export default function OtpScreen() {
     const navigation = useNavigation();
     const route = useRoute();
-    const { setUser } = useContext(UserContext)
-    const { mobileNumber, name, action } = route.params;
+    const { action } = route.params
+    const { signUpData, setSignUpData } = useContext(SignUpContext)
     const [otp, setOtp] = useState(['', '', '', '']);
-    console.log('value of mobileNumber is', mobileNumber, name, action)
 
     const handleContinue = () => {
         try {
-            console.log('value of otp is', otp.length, mobileNumber)
             if (action == 'Login') {
+                //will be sending request on server to verify if otp is correct
                 setUser(true)
             }
             else {
-                navigation.navigate('Email', {
-                    mobileNumber: mobileNumber,
-                    name: name,
-                    action: action
-                })
+                let nonEmptyArray = otp.filter(element => element !== "");
+                if (nonEmptyArray.length != 4) {
+                    Alert.alert('Invalid!', 'Please Enter Valid OTP!');
+                    return;
+                }
+                let finalOtp = nonEmptyArray.join('');
+                //here will send reques to backed and if verified will set user to true and and save token,mobileNumber in localstorage
+                navigation.navigate('Email')
             }
-            //here will send reques to backed and if verified will set user to true and and save token,mobileNumber in localstorage
         }
         catch (error) {
-            console.log('got error in verifying otp',error)
+            console.log('got error in verifying otp', error)
         }
     }
 

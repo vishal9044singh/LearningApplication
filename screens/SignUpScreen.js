@@ -1,13 +1,32 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import React, { useState, useContext } from 'react'
+import { View, Text, TouchableOpacity, Image, TextInput,Alert } from 'react-native';
 import { themeColors } from '../theme';
+import { SignUpContext } from '../context/signupContext'
 import { useNavigation } from '@react-navigation/native';
 
 export default function SignUpScreen() {
     const navigation = useNavigation();
+    const { signUpData, setSignUpData } = useContext(SignUpContext)
 
     const [mobileNumber, setMobileNumber] = useState('');
     const [name, setName] = useState('');
+
+    const handleNext = () => {
+        try {
+            if (!signUpData.name) {
+                Alert.alert('Required!', 'Name is Required!');
+                return;
+            }
+            if(signUpData.mobileNumber.length!=10){
+                Alert.alert('Invalid!', 'Please Enter Valid Mobile Number');
+                return;
+            }
+            navigation.navigate('OtpScreen', { action: 'SignUp' })
+        }
+        catch (error) {
+
+        }
+    }
 
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
@@ -15,33 +34,30 @@ export default function SignUpScreen() {
                 <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Sign Up</Text>
                 <View className="flex-row justify-center mt-6">
                     <Image source={require('../assets/images/signup/desktop.png')}
-                        style={{ width: 250,height: 250 }}
+                        style={{ width: 250, height: 250 }}
                     />
                 </View>
                 <View className="form space-y-2 ">
-                    <Text className="mb-1" style={{color:themeColors.formHeading}}>Enter your name and mobile number</Text>
+                    <Text className="mb-1" style={{ color: themeColors.formHeading }}>Enter your name and mobile number</Text>
                     <TextInput
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
                         style={styles.inputBox}
+                        onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, name: text }))}
                         placeholder='Enter Name'
                     />
                     <TextInput
                         className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3"
                         style={styles.inputBox}
+                        onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, mobileNumber: text }))}
                         placeholder='Enter Mobile Number'
                     />
                     <TouchableOpacity activeOpacity={0.9}
                         className="py-3 mt-6 rounded-full"
                         style={{ backgroundColor: themeColors.bg }}
-                        onPress={() => navigation.navigate('OtpScreen',
-                            {
-                                mobileNumber: mobileNumber,
-                                name: 'Vishal',
-                                action:'SignUp'
-                            })}>
-                        <Text className="font-xl text-center text-white">
-                            Next
-                        </Text>
+                        onPress={handleNext}
+                    // onPress={() => navigation.navigate('OtpScreen',{action:'SignUp'})}
+                    >
+                        <Text className="font-xl text-center text-white">Next</Text>
                     </TouchableOpacity>
                 </View>
                 <View className="flex-row justify-center py-12">
