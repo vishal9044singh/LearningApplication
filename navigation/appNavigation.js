@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from '../screens/MainScreen';
 import { themeColors } from '../theme';
-import { Image} from 'react-native';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { UserContext } from '../context/userContext';
@@ -45,16 +44,19 @@ export default function AppNavigation() {
       screenOptions={{ headerStyle: { backgroundColor: themeColors.bg }, 
       headerShadowVisible: false ,
       headerLeft: (props) => <CustomBackButton {...props} />,
-      }}>
+      }}
+      >
         {user ? (
           <>
-            <Stack.Screen name="Login" options={{
+            <Stack.Screen name="Login" 
+            options={{
               headerTitle: '',
               headerBackVisible: false,
               headerTitle: (props) => <LogoTitle {...props} />,
               headerTitleAlign: 'center',
               headerLeft: null,
-            }} component={LoginScreen} />
+            }} 
+            component={LoginScreen} />
 
             <Stack.Screen name="SignUp" options={{
               headerTitle: '',
@@ -92,12 +94,14 @@ export default function AppNavigation() {
               headerTitleAlign: 'center',
                }} component={Mpin} />
 
-            <Stack.Screen name="ConfirmMpin" options={{
+            <Stack.Screen name="ConfirmMpin" 
+            options={{
                headerTitle: '',
                headerBackVisible: false,
                headerTitle: (props) => <LogoTitle {...props} />,
                headerTitleAlign: 'center',
-               }} component={ConfirmMpin} />
+               }}
+               component={ConfirmMpin} />
 
             <Stack.Screen name="Address" options={{
               headerTitle: '',

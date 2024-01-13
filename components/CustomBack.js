@@ -40,7 +40,7 @@ export default function CustomBackButton() {
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={handleBack}>
-            <Image source={require('../assets/icons/arrowLeft/desktop.png')} style={{ width: 15, height: 15, marginLeft: 10 }} />
+            <Image source={require('../assets/icons/arrowLeft/desktop.png')} style={{ width: 15, height: 15, marginLeft: 15 }} />
         </TouchableOpacity>
     );
 };

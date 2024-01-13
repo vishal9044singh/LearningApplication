@@ -3,5 +3,8 @@ export const themeColors = {
    bgBold:'#004260',
    formBg:'#F5F9FB',
    formHeading:'#646C7B',
-   inputBackground:'#FFFFFF'
+   inputBackground:'#FFFFFF',
+   liveButton:'#0182BC',
+   moreLine:'#96B6C7',
+   moreText:'#FFFFFF'
 }   

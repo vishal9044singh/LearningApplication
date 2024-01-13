@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { View, TouchableOpacity, StatusBar } from "react-native";
 import { UserContext } from "../context/userContext";
 import { themeColors } from "../theme";
@@ -9,6 +9,7 @@ import HomeScreen from "./HomeScreen";
 import ExamsScreen from "./ExamsScreen";
 import MoreScreen from "./MoreScreen";
 import LogoTitle from "../components/LogoTitle";
+import HomeScreenStack from "../navigation/homeScreenStacks";
 import HeaderRight from "../components/headerRight/HeaderRight";
 import ProfileScreen from "./ProfileScreen";
 
@@ -31,6 +32,7 @@ const commonHeaderOptions = {
 
 const CustomTabBar = ({ state, descriptors, navigation }) => {
   return (
+    // <View style={mainStyle.tabBarContainer}>
     <View style={mainStyle.tabBar}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -68,13 +70,11 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
         );
       })}
     </View>
+    //  </View> 
   );
 };
 
-
 export default function MainScreen() {
-
-  const { user, setUser } = useContext(UserContext);
 
   return (
     <View style={{ flex: 1 }}>
@@ -83,11 +83,12 @@ export default function MainScreen() {
         tabBar={(props) => <CustomTabBar {...props} />}
       >
         <Tab.Screen
-          name="Home"
-          component={HomeScreen}
+          name="HomeScreenStack"
+          component={HomeScreenStack}
           options={{
             tabBarIcon: { name: 'home', size: 24 },
-            ...commonHeaderOptions,
+            // ...commonHeaderOptions,
+            headerShown:false
           }}
         />
         <Tab.Screen
