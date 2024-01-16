@@ -33,7 +33,7 @@ export const profileStyle = StyleSheet.create({
     },
     labels:{
         fontWeight:"bold",
-        color:themeColors.bgBold
+        color:'black'
     },
     keyIcon:{
         marginRight:5,

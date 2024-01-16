@@ -21,7 +21,7 @@ export default function SubscriptionPlans() {
                     style={styles.certificateContainer}
                     onPress={() => setSelectedSubsctiption(certificate.id)}>
                     <View style={styles.certificateContainer}>
-                        <View style={{ flexDirection: 'row', width: '85%', height: '60%', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <View style={styles.subscription}>
                             <Image source={{ uri: certificate.image }} style={styles.certificateImage} />
                             <View>
                                 <Text style={styles.planType}>Basic Plan</Text>
@@ -47,6 +47,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 20,
         backgroundColor: '#F5F9FB',
+    },
+    subscription: {
+        flexDirection: 'row',
+        width: '85%',
+        height: '60%',
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
     subContainerL: {
         flexDirection: 'row',
