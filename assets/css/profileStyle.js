@@ -18,6 +18,46 @@ export const profileStyle = StyleSheet.create({
         fontSize:10,
         color:themeColors.bg
     },
+    changeMpinContainer:{
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:10
+    },
+    location:{
+        flexDirection:"row",alignItems:"center",
+        marginBottom:5
+    },
+    userInputContainer:{
+        alignItems:"center"
+    },
+    labels:{
+        fontWeight:"bold",
+        color:themeColors.bgBold
+    },
+    keyIcon:{
+        marginRight:5,
+        height:20,
+        width:20
+    },
+    changeMpinText:{
+        color:'white'
+    },
+    changeMpinButton: {
+        backgroundColor: themeColors.bg,
+        width: '90%',
+        height: 40,
+        borderRadius: 50,
+        flexDirection:'row',
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    inputBox: {
+        height:50,
+        color:themeColors.formHeading,
+        backgroundColor: themeColors.inputBackground,
+        elevation: 5,
+    },
     cameraIconContainer: {
         position: 'absolute',
         bottom: -2,

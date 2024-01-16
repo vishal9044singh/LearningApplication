@@ -39,7 +39,8 @@ const dropdownStyle = StyleSheet.create({
         marginRight: 5,
     },
     placeholderStyle: {
-        fontSize: 16,
+        fontSize: 14,
+        color:themeColors.formHeading
     },
     selectedTextStyle: {
         fontSize: 16,
