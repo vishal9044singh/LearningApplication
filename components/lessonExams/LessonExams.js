@@ -104,7 +104,6 @@ export default function LessonExams() {
             console.log('Going to fetch video list')
             let response = await axiosWithoutToken.get('/admin/getAllVideos');
             if (response?.data?.success) {
-                console.log('value of response at line 103 is', response.data.allVideos)
                 setVideoList(response?.data?.allVideos)
             }
         }
@@ -118,7 +117,6 @@ export default function LessonExams() {
     }, []);
 
     const renderVideoCard = ({ item }) => {
-        console.log('value of itema at line 119 is',item)
         return (
             <View style={styles.cardContainer}>
                 <TouchableOpacity style={styles.imageContainer} activeOpacity={0.9} onPress={() => playVideo(item)}>
@@ -132,9 +130,9 @@ export default function LessonExams() {
                     <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">{item.title}</Text>
                     {
                         (item?.isCompleted) ?
-                        <Text style={styles.isCompleted}>Completed</Text>
-                        :
-                        <Text style={styles.date}>{getDateAndTime(item?.inAppAppearanceTime)}</Text>
+                            <Text style={styles.isCompleted}>Completed</Text>
+                            :
+                            <Text style={styles.date}>{getDateAndTime(item?.inAppAppearanceTime)}</Text>
                     }
                 </View>
             </View>

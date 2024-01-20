@@ -7,7 +7,6 @@ import HeadingAndDescription from '../HeadingAndDescription';
 
 export default function VideoPlayer({ route }) {
   const { videoData } = route.params;
-  console.log('value of videoData in VideoPlayer is', videoData);
   const [status, setStatus] = useState({});
 
   const handleFullscreenUpdate = (event) => {
@@ -25,7 +24,7 @@ export default function VideoPlayer({ route }) {
           <Video
             style={styles.video}
             source={{
-              uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+              uri: videoData?.videoData?.location,
             }}
             useNativeControls
             resizeMode={ResizeMode.CONTAIN}
@@ -40,7 +39,7 @@ export default function VideoPlayer({ route }) {
           </View>
 
           <View style={styles.buttonContainer}>
-            <ExamAndScoreBtn status={status} />
+            <ExamAndScoreBtn videoData={videoData} status={status} />
           </View>
 
         </View>

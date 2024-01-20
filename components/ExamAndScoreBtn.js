@@ -3,7 +3,8 @@ import { themeColors } from "../theme";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ExamAndScoreBtn({ status }) {
+export default function ExamAndScoreBtn({videoData, status }) {
+    console.log('value of videoData at line 7 is',videoData)
     const navigation = useNavigation();
     const [examBtnDisabled, setExamBtnStatus] = useState(false);
     
@@ -16,9 +17,8 @@ export default function ExamAndScoreBtn({ status }) {
         }
     }
 
-    const handleGiveExams=()=>{
-        console.log('Going to give exams at line 20 is')
-        navigation.navigate('LessonQuestions')
+    const handleGiveExams = () => {
+        navigation.navigate('LessonQuestions', { videoData })
     }
 
     useEffect(() => {

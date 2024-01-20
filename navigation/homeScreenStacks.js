@@ -9,6 +9,7 @@ import NotificationsScreen from "../screens/NotificationsScreen";
 import LessonQuestions from "../components/lessonExams/LessonQuestions";
 import HeaderRight from "../components/headerRight/HeaderRight";
 import CustomBackButton from "../components/CustomBack";
+import ReviewExam from "../components/reviewExam/ReviewExam";
 
 const Stack = createStackNavigator();
 
@@ -34,17 +35,7 @@ export default function HomeScreenStack() {
             screenOptions={{
                 headerStyle: { backgroundColor: themeColors.bg },
                 headerShadowVisible: false,
-            }}
-        >
-                        <Stack.Screen
-                name="LessonQuestions"
-                options={{
-                    ...commonHeaderOptions,
-                    headerLeft: (props) => <CustomBackButton {...props} />,
-                    headerTitleAlign: 'center',
-                }}
-                component={LessonQuestions}
-            />
+            }}>
             <Stack.Screen
                 name="HomeScreen"
                 options={{
@@ -70,6 +61,23 @@ export default function HomeScreenStack() {
                     headerTitleAlign: 'center',
                 }}
                 component={NotificationsScreen}
+            />
+            <Stack.Screen
+                name="LessonQuestions"
+                options={{
+                    ...commonHeaderOptions,
+                    headerLeft: (props) => <CustomBackButton {...props} />,
+                    headerTitleAlign: 'center',
+                }}
+                component={LessonQuestions}
+            />
+            <Stack.Screen
+                name='ReviewExam'
+                options={{
+                    tabBarIcon: { name: 'home', size: 24 },
+                    ...commonHeaderOptions,
+                }}
+                component={ReviewExam}
             />
         </Stack.Navigator>
     );
