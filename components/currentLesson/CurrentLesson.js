@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { themeColors } from '../../theme';
+import ExamAndScoreBtn from '../ExamAndScoreBtn';
 
 export default function CurrentLesson() {
   return (
@@ -24,13 +25,15 @@ export default function CurrentLesson() {
       </View>
 
       <View style={styles.examAndScore}>
-        <TouchableOpacity style={[styles.examBtn, { backgroundColor: themeColors.bg }]} activeOpacity={0.9} >
+        <ExamAndScoreBtn/>
+        {/* <TouchableOpacity style={[styles.examBtn, { backgroundColor: themeColors.bg }]} activeOpacity={0.9} >
           <Text style={styles.btnText}>Go to Exam</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.examBtn, { backgroundColor: themeColors.bgBold }]} activeOpacity={0.9}>
           <Text style={styles.btnText}>View Score</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
+
     </View>
   );
 };

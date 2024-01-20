@@ -3,6 +3,9 @@ import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react
 import { Dropdown } from 'react-native-element-dropdown';
 import { themeColors } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
+import { axiosWithoutToken } from '../../config/axiosConfig';
+import { showAlert } from '../UsefulAlerts';
+import { getDateAndTime } from '../../utils/usefulFunctions';
 
 export default function LessonExams() {
     const navigation = useNavigation();
@@ -96,23 +99,48 @@ export default function LessonExams() {
         navigation.navigate('VideoPlayer', { videoData })
     };
 
+    const fetchLessonVideos = async () => {
+        try {
+            console.log('Going to fetch video list')
+            let response = await axiosWithoutToken.get('/admin/getAllVideos');
+            if (response?.data?.success) {
+                console.log('value of response at line 103 is', response.data.allVideos)
+                setVideoList(response?.data?.allVideos)
+            }
+        }
+        catch (error) {
+          
+        }
+    }
+
     useEffect(() => {
-        setVideoList(dummyData);
+        fetchLessonVideos()
     }, []);
 
-    const renderVideoCard = ({ item }) => (
-        <View style={styles.cardContainer}>
-            <TouchableOpacity style={styles.imageContainer} activeOpacity={0.9} onPress={() => playVideo(item)}>
-                <Image source={{ uri: item.thumbnailUrl }} style={styles.thumbnail} />
-                <Image source={require('../../assets/icons/playButton.png')}
-                    // onPress={() => playVideo(item.videoUrl)}
-                    style={styles.playButton}
-                />
-            </TouchableOpacity>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.date}>{item.date}</Text>
-        </View>
-    );
+    const renderVideoCard = ({ item }) => {
+        console.log('value of itema at line 119 is',item)
+        return (
+            <View style={styles.cardContainer}>
+                <TouchableOpacity style={styles.imageContainer} activeOpacity={0.9} onPress={() => playVideo(item)}>
+                    <Image source={{ uri: item?.thumbnailData?.location }} style={styles.thumbnail} />
+                    <Image source={require('../../assets/icons/playButton.png')}
+                        // onPress={() => playVideo(item.videoUrl)}
+                        style={styles.playButton}
+                    />
+                </TouchableOpacity>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">{item.title}</Text>
+                    {
+                        (item?.isCompleted) ?
+                        <Text style={styles.isCompleted}>Completed</Text>
+                        :
+                        <Text style={styles.date}>{getDateAndTime(item?.inAppAppearanceTime)}</Text>
+                    }
+                </View>
+            </View>
+        )
+
+        }
 
     return (
         <View style={styles.container}>
@@ -141,7 +169,7 @@ export default function LessonExams() {
                 data={videoList}
                 horizontal
                 renderItem={renderVideoCard}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.videoId.toString()}
                 contentContainerStyle={styles.listContainer}
             />
         </View>
@@ -211,7 +239,7 @@ const styles = StyleSheet.create({
         width: null,
         height: null,
         resizeMode: 'contain',
-        borderRadius: 10,
+        borderRadius: 5,
     },
     playButton: {
         height: 30,
@@ -225,18 +253,35 @@ const styles = StyleSheet.create({
     playButtonText: {
         color: 'white',
     },
+    contentContainer:{
+        width: 180,
+        paddingHorizontal:5,
+    },
+    isCompleted:{
+        textAlign:'center',
+        borderWidth:1,
+        borderColor:'green',
+        borderRadius:10,
+        fontSize:12,
+        color:'green',
+        width:'45%',
+        fontWeight:500,
+        padding:2,
+        marginBottom:2
+    },
     title: {
-        fontSize: 10,
+        fontSize: 14,
+        fontWeight:'bold',
+        color:themeColors.bgBold,
         marginBottom: 4,
     },
     date: {
-        fontSize: 12,
+        fontSize: 10,
         color: 'gray',
     },
     imageContainer: {
         position: 'relative',
         width: 180,
         height: 120,
-        backgroundColor: 'cyan'
     },
 });

@@ -1,4 +1,4 @@
 export const config = {
-    SERVER_IP_ADDRESS: "http://34.205.189.162:8082",
+    SERVER_IP_ADDRESS: "http://192.168.1.6:8083",
     EXPO_PUBLIC_API_KEY: "abc123"
 };

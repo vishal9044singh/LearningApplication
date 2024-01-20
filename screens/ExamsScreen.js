@@ -1,6 +1,8 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { themeColors } from "../theme";
 import examsStyle from "../assets/css/examsStyle";
+import FilterExams from "../components/dropdownExams/FilterExams";
+import ExamsCard from "../components/examsCard/ExamsCard";
 
 export default function ExamsScreen() {
 
@@ -18,9 +20,8 @@ export default function ExamsScreen() {
                     </View>
                 </View>
 
-                <View>
-                    
-                </View>
+                <FilterExams/>
+                <ExamsCard/>
 
             </View>
         </View>

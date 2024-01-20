@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import LogoTitle from "../components/LogoTitle";
 import { themeColors } from "../theme";
 import NotificationsScreen from "../screens/NotificationsScreen";
+import LessonQuestions from "../components/lessonExams/LessonQuestions";
 import HeaderRight from "../components/headerRight/HeaderRight";
 import CustomBackButton from "../components/CustomBack";
 
@@ -35,6 +36,15 @@ export default function HomeScreenStack() {
                 headerShadowVisible: false,
             }}
         >
+                        <Stack.Screen
+                name="LessonQuestions"
+                options={{
+                    ...commonHeaderOptions,
+                    headerLeft: (props) => <CustomBackButton {...props} />,
+                    headerTitleAlign: 'center',
+                }}
+                component={LessonQuestions}
+            />
             <Stack.Screen
                 name="HomeScreen"
                 options={{
