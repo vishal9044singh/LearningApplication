@@ -9,11 +9,12 @@ import signup from "../assets/css/signup";
 import { SignUpContext } from '../context/signupContext';
 import { UserContext } from '../context/userContext';
 import styles from "../assets/css/styles";
-import { axiosWithoutToken } from "../config/axiosConfig";
+import { useAxiosWithoutToken } from "../config/axiosConfig";
 import { showAlert } from "./UsefulAlerts";
 import { commonError } from "../utils/usefulFunctions";
 
 export default function TermsAndConditions() {
+    const axiosWithoutToken = useAxiosWithoutToken();
     const [isChecked, setChecked] = useState(false);
     const [termsText, setTermsText] = useState('')
     const { signUpData, setSignUpData } = useContext(SignUpContext);
@@ -40,8 +41,7 @@ export default function TermsAndConditions() {
             }
         }
         catch (error) {
-            console.log('Got error in signup',error.response.data)
-            showAlert(commonError(error))
+            showAlert('Error',commonError(error))
         }
     }
 

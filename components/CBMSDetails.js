@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Alert,TextInput } from "react-native";
+import { View, Text, TouchableOpacity, Alert, TextInput, ScrollView } from "react-native";
 import { themeColors } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import { SignUpContext } from "../context/signupContext";
@@ -7,12 +7,13 @@ import DropdownElement from "./DropdownElement";
 import styles from "../assets/css/styles";
 import signup from "../assets/css/signup";
 import { useEffect, useState } from "react";
-import { axiosWithoutToken } from "../config/axiosConfig";
+import { useAxiosWithoutToken } from "../config/axiosConfig";
 import { showAlert } from "./UsefulAlerts";
 import { commonError } from "../utils/usefulFunctions";
 
 export default function CBMSDetails() {
-    const { signUpData,setSignUpData } = useContext(SignUpContext)
+    const axiosWithoutToken = useAxiosWithoutToken();
+    const { signUpData, setSignUpData } = useContext(SignUpContext)
     const navigation = useNavigation();
     const [cbmsData, setCbmsData] = useState({
         boards: [],
@@ -85,39 +86,42 @@ export default function CBMSDetails() {
 
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
-            <View className="flex-1 px-8 pt-8 rounded-t-3xl bg-white">
-                <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Sign Up</Text>
-                <View className="form space-y-2 mt-8">
+            <View className="flex-1 rounded-t-3xl bg-white">
+                <ScrollView className="mt-4">
+                    <View className="px-8 pt-8">
+                        <Text className='text-center text-2xl font-bold' style={{ color: themeColors.bgBold }}>Sign Up</Text>
+                        <View className="form space-y-2 mt-8">
+                            <Text style={styles.dropdownHeading}>Class</Text>
+                            <DropdownElement data={cbmsData.classList} dataType='class' />
 
-                    <Text style={styles.dropdownHeading}>Class</Text>
-                    <DropdownElement data={cbmsData.classList} dataType='class' />
+                            <Text style={styles.dropdownHeading} >Board</Text>
+                            <DropdownElement data={cbmsData.boards} dataType='board' />
 
-                    <Text style={styles.dropdownHeading} >Board</Text>
-                    <DropdownElement data={cbmsData.boards} dataType='board' />
+                            <Text style={styles.dropdownHeading} >Medium</Text>
+                            <DropdownElement data={cbmsData.mediums} dataType='medium' />
 
-                    <Text style={styles.dropdownHeading} >Medium</Text>
-                    <DropdownElement data={cbmsData.mediums} dataType='medium' />
+                            <Text style={styles.dropdownHeading}>Subject</Text>
+                            <DropdownElement data={cbmsData.subjects} dataType='subject' />
 
-                    <Text style={styles.dropdownHeading}>Subject</Text>
-                    <DropdownElement data={cbmsData.subjects} dataType='subject' />
+                            <Text style={signup.teacherIdLabel}>Teacher Id</Text>
+                            <TextInput
+                                className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
+                                style={styles.inputBox}
+                                onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, teacherId: text }))}
+                                placeholder='Enter Teacher Id...'
+                            />
 
-                    <Text style={signup.teacherIdLabel}>Teacher Id</Text>
-                    <TextInput
-                        className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
-                        style={styles.inputBox}
-                        onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, teacherId:text }))}
-                        placeholder='Enter Teacher Id...'
-                    />
-
-                    <TouchableOpacity activeOpacity={0.9}
-                        onPress={handleNext}
-                        className="py-3 rounded-full"
-                        style={{ backgroundColor: themeColors.bg }}>
-                        <Text className="font-xl text-center text-white">
-                            Next
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                            <TouchableOpacity activeOpacity={0.9}
+                                onPress={handleNext}
+                                className="py-3 rounded-full"
+                                style={{ backgroundColor: themeColors.bg }}>
+                                <Text className="font-xl text-center text-white">
+                                    Next
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </ScrollView>
             </View>
         </View>
     )

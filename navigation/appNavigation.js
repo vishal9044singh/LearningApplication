@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { View,Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from '../screens/MainScreen';
@@ -21,33 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
-
-  const { user, setUser } = useContext(UserContext);
-  console.log('value of user at line 25 is',user)
-
-  // const LogoTitle = () => {
-  //   return (
-  //     <Image
-  //       style={{ width: 35, height: 35 }}
-  //       source={require('../assets/logo/topLogo/desktop.png')} // Replace with the path to your logo
-  //       resizeMode="contain"
-  //     />
-  //   );
-  // };
-
-  const isUserExists = async () => {
-    let token = await AsyncStorage.getItem('access_Token');
-    if (token) {
-      setUser(true)
-    }
-    else {
-      setUser(false)
-    }
-  }
-
-  useEffect(() => {
-    isUserExists()
-  }, [])
+  const { user,setUser } = useContext(UserContext);
 
   return (
     <NavigationContainer>

@@ -7,12 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../context/userContext';
 import { useRoute } from '@react-navigation/native';
 import { SignUpContext } from '../context/signupContext';
-import { axiosWithoutToken } from '../config/axiosConfig';
+import { useAxiosWithoutToken } from '../config/axiosConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { showAlert } from '../components/UsefulAlerts';
 import { commonError } from '../utils/usefulFunctions';
 
 export default function OtpScreen() {
+    const axiosWithoutToken = useAxiosWithoutToken();
     const navigation = useNavigation();
     const route = useRoute();
     const { setUser } = useContext(UserContext)

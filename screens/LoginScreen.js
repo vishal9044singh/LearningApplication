@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { themeColors } from '../theme';
 import styles from '../assets/css/styles';
-import { axiosWithoutToken } from '../config/axiosConfig';
+import { useAxiosWithoutToken } from '../config/axiosConfig';
 import { commonError } from '../utils/usefulFunctions';
 import { useNavigation } from '@react-navigation/native';
 import { showAlert } from '../components/UsefulAlerts';
 import login from '../assets/css/login';
 
 export default function LoginScreen() {
+  const axiosWithoutToken = useAxiosWithoutToken();
   const navigation = useNavigation();
   const [mobileNumber,setMobileNumber]=useState('');
 

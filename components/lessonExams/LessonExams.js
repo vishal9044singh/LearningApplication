@@ -3,12 +3,13 @@ import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react
 import { Dropdown } from 'react-native-element-dropdown';
 import { themeColors } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
-import { axiosWithoutToken } from '../../config/axiosConfig';
+import { useAxiosWithToken } from '../../config/axiosConfig';
 import { showAlert } from '../UsefulAlerts';
 import { getDateAndTime } from '../../utils/usefulFunctions';
 
 export default function LessonExams() {
     const navigation = useNavigation();
+    let axiosWithToken = useAxiosWithToken();
     const dummyData = [
         {
             id: 1,
@@ -101,14 +102,13 @@ export default function LessonExams() {
 
     const fetchLessonVideos = async () => {
         try {
-            console.log('Going to fetch video list')
-            let response = await axiosWithoutToken.get('/admin/getAllVideos');
+            let response = await axiosWithToken.get('/admin/getAllVideos');
             if (response?.data?.success) {
                 setVideoList(response?.data?.allVideos)
             }
         }
         catch (error) {
-          
+          console.log('Got error in fetching lessons',error)
         }
     }
 

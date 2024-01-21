@@ -78,7 +78,7 @@ export default function MainScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar backgroundColor="black" barStyle="light-content" />
+       <StatusBar style="light" />
       <Tab.Navigator
         tabBar={(props) => <CustomTabBar {...props} />}
       >

@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity,Animated } from "react-native";
-import { useRef,useEffect,useContext } from "react";
+import { View, Text, Image, TouchableOpacity, Animated, Alert } from "react-native";
+import { useRef, useEffect, useContext } from "react";
 import { themeColors } from "../theme";
 import { UserContext } from "../context/userContext";
 import moreStyle from "../assets/css/moreStyle";
@@ -13,25 +13,45 @@ export default function MoreScreen() {
     const { setUser } = useContext(UserContext)
 
     const handleLogout = async () => {
-        await AsyncStorage.removeItem('access_Token');
-        setUser(false)
-    }
+        Alert.alert(
+            'Logout',
+            'Are you sure you want to logout?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Logout canceled'),
+                    style: 'cancel',
+                },
+                {
+                    text: 'Logout',
+                    onPress: async () => {
+                        await AsyncStorage.removeItem('access_Token');
+                        let token = await AsyncStorage.getItem('access_Token');
+                        console.log('Value of token after deletion is', token);
+                        setUser(false);
+                    },
+                    style: 'destructive',
+                },
+            ],
+            { cancelable: true }
+        );
+    };
 
     useEffect(() => {
         Animated.timing(
-          fadeAnim,
-          {
-            toValue: 2,
-            duration: 1000, // Adjust the duration as needed
-            useNativeDriver: true,
-          }
+            fadeAnim,
+            {
+                toValue: 2,
+                duration: 1000, // Adjust the duration as needed
+                useNativeDriver: true,
+            }
         ).start();
-      }, [fadeAnim]);
+    }, [fadeAnim]);
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
             <View className="flex-1 rounded-t-3xl bg-white">
                 <View style={moreStyle.styledContainer} >
-                <Animated.View style={{ ...moreStyle.styledSubContainer, opacity: fadeAnim }}>
+                    <Animated.View style={{ ...moreStyle.styledSubContainer, opacity: fadeAnim }}>
 
                         <View style={moreStyle.userDetails}>
                             <Image source={{ uri: 'https' }} style={moreStyle.profileImage} />
@@ -65,7 +85,7 @@ export default function MoreScreen() {
 
                         </View>
                         <Text style={moreStyle.versionId}>Version-1.25</Text>
-                        </Animated.View>
+                    </Animated.View>
 
                 </View>
             </View>

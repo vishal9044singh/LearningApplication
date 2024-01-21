@@ -4,14 +4,15 @@ import { UserContext } from '../context/userContext';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { themeColors } from '../theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { axiosWithoutToken } from '../config/axiosConfig';
+import { useAxiosWithoutToken } from '../config/axiosConfig';
 import OtpInput from '../components/OtpInput';
 import { showAlert } from '../components/UsefulAlerts';
 import { commonError } from '../utils/usefulFunctions';
 
 export default function MpinScreen() {
   const route = useRoute();
-  const { setUser } = useContext(UserContext)
+  const axiosWithoutToken = useAxiosWithoutToken();
+  const { setUser } = useContext(UserContext);
   const { mobileNumber } = route.params;
   const [otp, setOtp] = useState(['', '', '', '']);
 

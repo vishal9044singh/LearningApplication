@@ -10,6 +10,7 @@ import Certificates from "../components/certificates/Certificates";
 
 export default function HomeScreen() {
   return (
+
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
       <View className="flex-1 rounded-t-3xl" style={{ backgroundColor: '#F5F9FB' }}>
         <ScrollView className='mt-5'>

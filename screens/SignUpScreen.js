@@ -5,14 +5,14 @@ import { SignUpContext } from '../context/signupContext'
 import { useNavigation } from '@react-navigation/native';
 import { showAlert } from '../components/UsefulAlerts';
 import { commonError } from '../utils/usefulFunctions';
-import { axiosWithoutToken } from '../config/axiosConfig';
+import { useAxiosWithoutToken } from '../config/axiosConfig';
 
 export default function SignUpScreen() {
+    const axiosWithoutToken = useAxiosWithoutToken();
     const navigation = useNavigation();
     const { signUpData, setSignUpData, clearSignUpData } = useContext(SignUpContext)
 
     const handleNext = async () => {
-        console.log('Going to at line 15')
         try {
             if (!signUpData.name) {
                 Alert.alert('Required!', 'Name is Required!');

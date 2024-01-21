@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, TextInput } from "react-native";
 import { themeColors } from "../theme";
-import signup from "../assets/css/signup";
+import { axiosWithoutToken } from "../config/axiosConfig";
 import { useEffect, useState } from "react";
 import { profileStyle } from "../assets/css/profileStyle";
 import DropdownElement from "../components/DropdownElement";
