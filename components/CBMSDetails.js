@@ -1,15 +1,18 @@
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TouchableOpacity, Alert,TextInput } from "react-native";
 import { themeColors } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import { SignUpContext } from "../context/signupContext";
 import { useContext } from "react";
 import DropdownElement from "./DropdownElement";
 import styles from "../assets/css/styles";
+import signup from "../assets/css/signup";
 import { useEffect, useState } from "react";
 import { axiosWithoutToken } from "../config/axiosConfig";
+import { showAlert } from "./UsefulAlerts";
+import { commonError } from "../utils/usefulFunctions";
 
 export default function CBMSDetails() {
-    const { signUpData } = useContext(SignUpContext)
+    const { signUpData,setSignUpData } = useContext(SignUpContext)
     const navigation = useNavigation();
     const [cbmsData, setCbmsData] = useState({
         boards: [],
@@ -18,28 +21,35 @@ export default function CBMSDetails() {
         subjects: []
     })
 
-    const handleNext = () => {
-        try {
-            if (!signUpData.board) {
-                Alert.alert('Required!', 'Please Select Board of Education!');
-                return;
-            }
-            if (!signUpData.medium) {
-                Alert.alert('Required!', 'Please Select Medium of Education!');
-                return;
-            }
-            if (!signUpData.class) {
-                Alert.alert('Required!', 'Please Select your Class!');
-                return;
-            }
-            if (!signUpData.subject) {
-                Alert.alert('Required!', 'Please Select your Subject!');
-                return;
-            }
-            navigation.navigate('TermsAndConditions')
+    const handleNext = async () => {
+        if (!signUpData.board) {
+            Alert.alert('Required!', 'Please Select Board of Education!');
+            return;
         }
-        catch (err) {
-            console.log('Got error is', err)
+        if (!signUpData.medium) {
+            Alert.alert('Required!', 'Please Select Medium of Education!');
+            return;
+        }
+        if (!signUpData.class) {
+            Alert.alert('Required!', 'Please Select your Class!');
+            return;
+        }
+        if (!signUpData.subject) {
+            Alert.alert('Required!', 'Please Select your Subject!');
+            return;
+        }
+        if (!signUpData.teacherId) {
+            Alert.alert('Required!', 'Please Enter TeacherId!');
+            return;
+        }
+        try {
+            let response = await axiosWithoutToken.get(`/student/verifyTeacher?teacherId=${signUpData.teacherId}`);
+            if (response?.data?.success) {
+                navigation.navigate('TermsAndConditions')
+            }
+        }
+        catch (error) {
+            showAlert(commonError(error))
         }
     }
 
@@ -90,6 +100,14 @@ export default function CBMSDetails() {
 
                     <Text style={styles.dropdownHeading}>Subject</Text>
                     <DropdownElement data={cbmsData.subjects} dataType='subject' />
+
+                    <Text style={signup.teacherIdLabel}>Teacher Id</Text>
+                    <TextInput
+                        className="p-2 bg-gray-100 text-gray-700 rounded-md mb-3 "
+                        style={styles.inputBox}
+                        onChangeText={(text) => setSignUpData((prevData) => ({ ...prevData, teacherId:text }))}
+                        placeholder='Enter Teacher Id...'
+                    />
 
                     <TouchableOpacity activeOpacity={0.9}
                         onPress={handleNext}

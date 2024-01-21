@@ -51,7 +51,8 @@ export default function TermsAndConditions() {
             try {
                 let response = await axiosWithoutToken.get('/student/getTermsAndConditions');
                 if (response?.data?.success) {
-                    setTermsText(response.data.termsAndConditions)
+                    let terms = response?.data?.termsAndConditions ? response.data.termsAndConditions :'Terms And conditions Not Available!';
+                    setTermsText(terms)
                 }
             }
             catch (error) {

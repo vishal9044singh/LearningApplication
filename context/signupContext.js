@@ -17,6 +17,7 @@ export const SignUpContextProvider = ({ children }) => {
             country: '',
             pincode: ''
         },
+        teacherId:'',
         mpin: '',
         confirmMpin: '',
         class: '',
@@ -40,6 +41,7 @@ export const SignUpContextProvider = ({ children }) => {
                 country: '',
                 pincode: '',
             },
+            teacherId:'',
             mpin: '',
             confirmMpin: '',
             class: '',

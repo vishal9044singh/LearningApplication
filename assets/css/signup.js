@@ -12,6 +12,10 @@ export default signup = StyleSheet.create({
     enterAddress:{
         color:'#727380'
     },
+    teacherIdLabel:{
+        fontWeight:'bold',
+        color:'black'
+    },
     checkbox: {
         marginTop:10,
         marginBottom:10,

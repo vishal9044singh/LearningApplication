@@ -1,13 +1,22 @@
 import { View, Text, Image, TouchableOpacity,Animated } from "react-native";
-import { useRef,useEffect } from "react";
+import { useRef,useEffect,useContext } from "react";
 import { themeColors } from "../theme";
+import { UserContext } from "../context/userContext";
 import moreStyle from "../assets/css/moreStyle";
 import logoutIcon from '../assets/icons/logoutIcon.png';
 import subscriptionIcon from '../assets/icons/subscriptionIcon.png';
 import certificatesIcon from '../assets/icons/certificatesIcon.png'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MoreScreen() {
     const fadeAnim = useRef(new Animated.Value(0)).current;
+    const { setUser } = useContext(UserContext)
+
+    const handleLogout = async () => {
+        await AsyncStorage.removeItem('access_Token');
+        setUser(false)
+    }
+
     useEffect(() => {
         Animated.timing(
           fadeAnim,
@@ -48,7 +57,7 @@ export default function MoreScreen() {
                             </TouchableOpacity>
                             <View style={moreStyle.line} />
 
-                            <TouchableOpacity style={moreStyle.menuItem} activeOpacity={0.6}>
+                            <TouchableOpacity style={moreStyle.menuItem} activeOpacity={0.6} onPress={handleLogout}>
                                 <Image source={logoutIcon} style={moreStyle.icon} />
                                 <Text style={moreStyle.menuText}>Logout</Text>
                             </TouchableOpacity>

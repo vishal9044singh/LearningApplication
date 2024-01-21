@@ -16,6 +16,7 @@ import CBMSDetails from '../components/CBMSDetails';
 import CustomBackButton from '../components/CustomBack';
 import TermsAndConditions from '../components/TermsAndConditions';
 import LogoTitle from '../components/LogoTitle';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,9 +35,19 @@ export default function AppNavigation() {
   //   );
   // };
 
-  useEffect(()=>{
-    setUser(false)
-  },[])
+  const isUserExists = async () => {
+    let token = await AsyncStorage.getItem('access_Token');
+    if (token) {
+      setUser(true)
+    }
+    else {
+      setUser(false)
+    }
+  }
+
+  useEffect(() => {
+    isUserExists()
+  }, [])
 
   return (
     <NavigationContainer>
@@ -46,7 +57,7 @@ export default function AppNavigation() {
       headerLeft: (props) => <CustomBackButton {...props} />,
       }}
       >
-        {user ? (
+        {!user ? (
           <>
             <Stack.Screen name="Login" 
             options={{
