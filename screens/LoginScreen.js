@@ -18,20 +18,23 @@ export default function LoginScreen() {
       showAlert('Alert', 'Please Enter Valid Mobile Number!');
       return;
     }
-
     try {
-      let response = await axiosWithoutToken.post('/auth/sendOtp',{mobileNumber:mobileNumber,role:'student'});
+      let response = await axiosWithoutToken.post('/auth/sendOtp', { mobileNumber: mobileNumber, role: 'student' });
       if (response?.data?.success) {
-        navigation.navigate('OtpScreen',
-          {
-            mobileNumber: mobileNumber,
-            action: 'Login'
-          });
+        navigation.navigate('OtpScreen', { mobileNumber: mobileNumber, action: 'Login' });
       }
     }
     catch (error) {
       showAlert('Alert!', commonError(error))
     }
+  }
+
+  const handleMpinLogin = () => {
+    if (mobileNumber.length != 10) {
+      showAlert('Invalid!', 'Please Enter Valid Mobile Number!');
+      return;
+    }
+    navigation.navigate('MpinScreen', { mobileNumber: mobileNumber, action: 'Login' });
   }
   
 
@@ -68,7 +71,7 @@ export default function LoginScreen() {
 
         <View className='mt-3' style={login.mpin}>
           <Entypo name="key" size={24} color={themeColors.bg} />
-          <TouchableOpacity onPress={() => navigation.navigate('MpinScreen')} activeOpacity={0.9}>
+          <TouchableOpacity onPress={handleMpinLogin} activeOpacity={0.9}>
             <Text className='font-bold' style={{ color: themeColors.bg }}> Login With MPIN</Text>
           </TouchableOpacity>
         </View>

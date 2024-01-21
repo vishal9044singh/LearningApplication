@@ -15,29 +15,30 @@ import { commonError } from '../utils/usefulFunctions';
 export default function OtpScreen() {
     const navigation = useNavigation();
     const route = useRoute();
-    const { action } = route.params
+    const { setUser } = useContext(UserContext)
+    const { action, mobileNumber } = route.params;
     const { signUpData, setSignUpData } = useContext(SignUpContext)
     const [otp, setOtp] = useState(['', '', '', '']);
 
     const handleContinue = async () => {
         try {
+            let nonEmptyArray = otp.filter(element => element !== "");
+            if (nonEmptyArray.length != 4) {
+                Alert.alert('Invalid!', 'Please Enter Valid OTP!');
+                return;
+            }
+            let finalOtp = nonEmptyArray.join('');
             if (action == 'Login') {
-                //will be sending request on server to verify if otp is correct
-                let response = await axiosWithoutToken.post('/auth/verifyOpt',{mobileNumber:'',otp:''});
+                let response = await axiosWithoutToken.post('/auth/studentSignIn', { key: "mobileNumber", mobileNumber: mobileNumber, otp: finalOtp });
                 if (response?.data?.success) {
-                    //here will send reques to backed and if verified will set user to true and and save token,mobileNumber in localstorage
-                    // await AsyncStorage.setItem('access_Token',)
-                    // setUser(true)
+                    await AsyncStorage.setItem('access_Token', response.data.access_Token)
+                    let token = await AsyncStorage.getItem('access_Token')
+                    if (token) {
+                        setUser(true)
+                    }
                 }
             }
             else {
-                let nonEmptyArray = otp.filter(element => element !== "");
-                if (nonEmptyArray.length != 4) {
-                    Alert.alert('Invalid!', 'Please Enter Valid OTP!');
-                    return;
-                }
-                let finalOtp = nonEmptyArray.join('');
-                console.log("value of final Otp is",finalOtp)
                 let response = await axiosWithoutToken.post('/auth/verifyOtp', { mobileNumber: signUpData.mobileNumber, otp: finalOtp });
                 if (response?.data?.success) {
                     setSignUpData((prevState) => ({
@@ -50,7 +51,6 @@ export default function OtpScreen() {
         }
         catch (error) {
             showAlert(commonError(error))
-            console.log('got error in verifying otp', error.response.data)
         }
     }
 

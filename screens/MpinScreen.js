@@ -1,14 +1,40 @@
-import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { useRoute } from '@react-navigation/native';
+import { UserContext } from '../context/userContext';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { themeColors } from '../theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { axiosWithoutToken } from '../config/axiosConfig';
 import OtpInput from '../components/OtpInput';
+import { showAlert } from '../components/UsefulAlerts';
+import { commonError } from '../utils/usefulFunctions';
 
 export default function MpinScreen() {
+  const route = useRoute();
+  const { setUser } = useContext(UserContext)
+  const { mobileNumber } = route.params;
   const [otp, setOtp] = useState(['', '', '', '']);
 
-  const handleLogin = () => {
-    console.log('value of otp is', otp)
-    //here will send reques to backed and if verified will navigate to next screen
+  const handleLogin = async () => {
+    try {
+      let nonEmptyArray = otp.filter(element => element !== "");
+      if (nonEmptyArray.length != 4) {
+        Alert.alert('Invalid!', 'Please Enter Valid OTP!');
+        return;
+      }
+      let finalOtp = nonEmptyArray.join('');
+      let response = await axiosWithoutToken.post('/auth/studentSignIn', { key: "mpin", mobileNumber: mobileNumber, mpin: finalOtp });
+      if (response?.data?.success) {
+        await AsyncStorage.setItem('access_Token', response.data.access_Token)
+        let token = await AsyncStorage.getItem('access_Token')
+        if (token) {
+          setUser(true)
+        }
+      }
+    }
+    catch (error) {
+      showAlert('Error', commonError(error))
+    }
   }
 
   return (
