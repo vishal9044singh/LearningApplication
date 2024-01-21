@@ -2,6 +2,9 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView, TextInput 
 import { themeColors } from "../../theme";
 import { useEffect, useState } from "react";
 import Checkbox from "expo-checkbox";
+import { axiosWithoutToken } from '../../config/axiosConfig';
+import { showAlert } from "../UsefulAlerts";
+import { commonError } from '../../utils/usefulFunctions';
 
 export default function LessonQuestions({ route }) {
     let { videoData } = route.params;
@@ -11,8 +14,8 @@ export default function LessonQuestions({ route }) {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [textAnswer, setTextAnswer] = useState('')
 
-    const handleNext = (isLastQuestion = false) => {
-        console.log('value of is lastQuestion', isLastQuestion)
+    const handleNext = async (isLastQuestion) => {
+        console.trace('value of is lastQuestion', isLastQuestion)
         let updatedQuestions = [...lessonQuestions];
         if (selectedOptions.length > 0) {
             updatedQuestions[currentQuestion].options.forEach((option, index) => {
@@ -22,7 +25,20 @@ export default function LessonQuestions({ route }) {
             updatedQuestions[currentQuestion].inputAnswer = textAnswer.trim();
         }
         if (!!isLastQuestion) {
-            console.log('This is last question of input Text')
+            // console.log('This is last question of input Text',updatedQuestions)
+            try{
+                console.log('value of exam id at line', videoData.lessonExam.examId)
+                console.log('value of videoId at line', videoData.videoId)
+                let response = await axiosWithoutToken.post('/student/generateScoreCard', { updatedQuestions: updatedQuestions, examId: videoData.lessonExam.examId, videoId: videoData.videoId });
+                console.log('Got response at line 29 is', response.data)
+                if (response?.data?.success) {
+                    showAlert(commonError(error));
+                }
+            }
+            catch(error){
+                showAlert(commonError(error));
+                console.log('Got error at line 35 is',error)
+            }
             //here we will send request to backed to save the questions array
         }
         else {
@@ -112,7 +128,7 @@ export default function LessonQuestions({ route }) {
                                     { backgroundColor: !selectedOptions.length && !textAnswer.trim() ? 'lightgrey' : themeColors.bg },
                                 ]}
                                 activeOpacity={0.9}
-                                onPress={handleNext}
+                                onPress={()=>handleNext(false)}
                             >
                                 <Text style={styles.btnText}>Next</Text>
                             </TouchableOpacity>
