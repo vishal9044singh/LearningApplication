@@ -1,13 +1,15 @@
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { themeColors } from "../theme";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { LoaderContext } from "../context/loaderContext";
+import { useAxiosWithToken } from "../config/axiosConfig";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ExamAndScoreBtn({videoData, status }) {
-    console.log('value of videoData at line 7 is',videoData)
+export default function ExamAndScoreBtn({ videoData, status }) {
+    const axiosWithToken = useAxiosWithToken();
     const navigation = useNavigation();
     const [examBtnDisabled, setExamBtnStatus] = useState(false);
-    
+
     const handleVideoWatched = async () => {
         try {
             let response = await axiosWithToken.post('/student/setVideoWatched')
@@ -25,6 +27,9 @@ export default function ExamAndScoreBtn({videoData, status }) {
         if (status?.positionMillis >= status?.durationMillis * 0.00 && !examBtnDisabled) {
             setExamBtnStatus(true);
             // handleVideoWatched();
+        }
+        else{
+            setExamBtnStatus(false)
         }
     }, [status, examBtnDisabled]);
 

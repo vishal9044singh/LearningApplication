@@ -4,6 +4,7 @@ import { Video, ResizeMode } from 'expo-av';
 import { themeColors } from '../../theme';
 import ExamAndScoreBtn from '../ExamAndScoreBtn';
 import HeadingAndDescription from '../HeadingAndDescription';
+import { InternetContextProvider } from '../../context/internextContext';
 
 export default function VideoPlayer({ route }) {
   const { videoData } = route.params;
@@ -20,29 +21,33 @@ export default function VideoPlayer({ route }) {
   return (
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
       <View className="flex-1 pt-6 rounded-t-3xl" style={{ backgroundColor: themeColors.formBg }}>
-        <View style={styles.container}>
-          <Video
-            style={styles.video}
-            source={{
-              uri: videoData?.videoData?.location,
-            }}
-            useNativeControls
-            resizeMode={ResizeMode.CONTAIN}
-            isLooping={false}
-            orientation="LANDSCAPE"
-            onPlaybackStatusUpdate={status => setStatus(() => status)}
-            onFullscreenUpdate={handleFullscreenUpdate}
-          />
+        <InternetContextProvider>
 
-          <View style={styles.titleAndDescription}>
-            <HeadingAndDescription />
+          <View style={styles.container}>
+            <Video
+              style={styles.video}
+              source={{
+                uri: videoData?.videoData?.location,
+              }}
+              useNativeControls
+              resizeMode={ResizeMode.CONTAIN}
+              isLooping={false}
+              orientation="LANDSCAPE"
+              onPlaybackStatusUpdate={status => setStatus(() => status)}
+              onFullscreenUpdate={handleFullscreenUpdate}
+            />
+
+            <View style={styles.titleAndDescription}>
+              <HeadingAndDescription />
+            </View>
+
+            <View style={styles.buttonContainer}>
+              <ExamAndScoreBtn videoData={videoData} status={status} />
+            </View>
+
           </View>
+        </InternetContextProvider>
 
-          <View style={styles.buttonContainer}>
-            <ExamAndScoreBtn videoData={videoData} status={status} />
-          </View>
-
-        </View>
       </View>
     </View>
   );

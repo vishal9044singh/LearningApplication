@@ -3,50 +3,56 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { config } from './systemConfig';
 import { useLoader } from '../context/loaderContext';
+import NetInfo from '@react-native-community/netinfo';
+import { useInternet } from '../context/internextContext';
 
 const baseConfig = {
-    baseURL: config.SERVER_IP_ADDRESS,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+  baseURL: config.SERVER_IP_ADDRESS,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 };
 
 const axiosWithToken = axios.create(baseConfig)
 
 const useAxiosWithToken = () => {
-    const { setLoading } = useLoader();
-    useEffect(() => {
-        const requestInterceptor = axiosWithToken.interceptors.request.use(
-            async (config) => {
-                setLoading(true);
-                const token = await AsyncStorage.getItem('access_Token');
-                if (token) {
-                    config.headers.Authorization = `Bearer ${token}`;
-                }
-                return config;
-            },
-            (error) => {
-                setLoading(false);
-                return Promise.reject(error);
-            }
-        );
-        const responseInterceptor = axiosWithToken.interceptors.response.use(
-            (response) => {
-                setLoading(false);
-                return response;
-            },
-            (error) => {
-                setLoading(false);
-                return Promise.reject(error);
-            }
-        );
-        return () => {
-            axiosWithToken.interceptors.request.eject(requestInterceptor);
-            axiosWithToken.interceptors.response.eject(responseInterceptor);
-        };
-    }, [setLoading]);
+  const { setLoading } = useLoader();
+  useEffect(() => {
+    const requestInterceptor = axiosWithToken.interceptors.request.use(
+      async (config) => {
+        const state = await NetInfo.fetch();
+        if (!state.isConnected) {
+          return Promise.reject(new Error('No internet connection'));
+        }
+        setLoading(true);
+        const token = await AsyncStorage.getItem('access_Token');
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
 
-    return axiosWithToken;
+    const responseInterceptor = axiosWithToken.interceptors.response.use((response) => {
+      setLoading(false);
+      return response;
+    },
+      (error) => {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
+    return () => {
+      axiosWithToken.interceptors.request.eject(requestInterceptor);
+      axiosWithToken.interceptors.response.eject(responseInterceptor);
+    };
+  }, [setLoading]);
+
+  return axiosWithToken;
 };
 
 const axiosWithoutToken = axios.create(baseConfig);
@@ -56,7 +62,11 @@ const useAxiosWithoutToken = () => {
 
   useEffect(() => {
     const requestInterceptor = axiosWithoutToken.interceptors.request.use(
-      (config) => {
+      async (config) => {
+        const state = await NetInfo.fetch();
+        if (!state.isConnected) {
+          return Promise.reject(new Error('No internet connection'));
+        }
         setLoading(true);
         return config;
       },
@@ -86,4 +96,50 @@ const useAxiosWithoutToken = () => {
   return axiosWithoutToken;
 };
 
-export { useAxiosWithoutToken, useAxiosWithToken };
+
+const useAxiosWithTokenInternet = () => {
+  const { setLoading } = useLoader();
+  const { setInternet } = useInternet();
+
+  useEffect(() => {
+    const requestInterceptor = axiosWithToken.interceptors.request.use(
+      async (config) => {
+        const state = await NetInfo.fetch();
+        if (state.isConnected) {
+          setInternet(false);
+          return Promise.reject(new Error('No internet connection'));
+        }
+        setLoading(true);
+        const token = await AsyncStorage.getItem('access_Token');
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
+
+    const responseInterceptor = axiosWithToken.interceptors.response.use(
+      (response) => {
+        setLoading(false);
+        return response;
+      },
+      (error) => {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axiosWithToken.interceptors.request.eject(requestInterceptor);
+      axiosWithToken.interceptors.response.eject(responseInterceptor);
+    };
+  }, [setLoading, setInternet]);
+
+  return axiosWithToken;
+};
+
+export { useAxiosWithoutToken, useAxiosWithToken, useAxiosWithTokenInternet };

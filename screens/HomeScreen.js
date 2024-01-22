@@ -7,19 +7,21 @@ import MonthlyExams from "../components/monthlyExams/MonthlyExams";
 import CurrentLesson from "../components/currentLesson/CurrentLesson";
 import FeaturedVideos from "../components/featuredVideos/FeaturedVideos";
 import Certificates from "../components/certificates/Certificates";
+import { InternetContextProvider } from "../context/internextContext";
 
 export default function HomeScreen() {
   return (
-
     <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
       <View className="flex-1 rounded-t-3xl" style={{ backgroundColor: '#F5F9FB' }}>
         <ScrollView className='mt-5'>
-          <CurrentLesson />
-          <MonthlyExams />
-          <LessonExams />
-          <BannerList />
-          <FeaturedVideos />
-          <Certificates />
+          <InternetContextProvider>
+            <CurrentLesson />
+            <MonthlyExams />
+            <LessonExams />
+            <BannerList />
+            <FeaturedVideos />
+            <Certificates />
+          </InternetContextProvider>
         </ScrollView>
       </View>
     </View>

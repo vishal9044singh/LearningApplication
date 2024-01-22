@@ -31,54 +31,54 @@ export default function HomeScreenStack() {
     };
 
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerStyle: { backgroundColor: themeColors.bg },
-                headerShadowVisible: false,
-            }}>
-            <Stack.Screen
-                name="HomeScreen"
-                options={{
-                    tabBarIcon: { name: 'home', size: 24 },
-                    ...commonHeaderOptions,
-                }}
-                component={HomeScreen}
-            />
-            <Stack.Screen
-                name="VideoPlayer"
-                options={{
-                    ...commonHeaderOptions,
-                    headerLeft: (props) => <CustomBackButton {...props} />,
-                    headerTitleAlign: 'center',
-                }}
-                component={VideoPlayer}
-            />
-            <Stack.Screen
-                name="NotificationsScreen"
-                options={{
-                    ...commonHeaderOptions,
-                    headerLeft: (props) => <CustomBackButton {...props} />,
-                    headerTitleAlign: 'center',
-                }}
-                component={NotificationsScreen}
-            />
-            <Stack.Screen
-                name="LessonQuestions"
-                options={{
-                    ...commonHeaderOptions,
-                    headerLeft: (props) => <CustomBackButton {...props} />,
-                    headerTitleAlign: 'center',
-                }}
-                component={LessonQuestions}
-            />
-            <Stack.Screen
-                name='ReviewExam'
-                options={{
-                    tabBarIcon: { name: 'home', size: 24 },
-                    ...commonHeaderOptions,
-                }}
-                component={ReviewExam}
-            />
-        </Stack.Navigator>
+            <Stack.Navigator
+                screenOptions={{
+                    headerStyle: { backgroundColor: themeColors.bg },
+                    headerShadowVisible: false,
+                }}>
+                <Stack.Screen
+                    name="HomeScreen"
+                    options={{
+                        tabBarIcon: { name: 'home', size: 24 },
+                        ...commonHeaderOptions,
+                    }}
+                    component={HomeScreen}
+                />
+                <Stack.Screen
+                    name="VideoPlayer"
+                    options={{
+                        ...commonHeaderOptions,
+                        headerLeft: (props) => <CustomBackButton {...props} />,
+                        headerTitleAlign: 'center',
+                    }}
+                    component={VideoPlayer}
+                />
+                <Stack.Screen
+                    name="NotificationsScreen"
+                    options={{
+                        ...commonHeaderOptions,
+                        headerLeft: (props) => <CustomBackButton {...props} />,
+                        headerTitleAlign: 'center',
+                    }}
+                    component={NotificationsScreen}
+                />
+                <Stack.Screen
+                    name="LessonQuestions"
+                    options={{
+                        ...commonHeaderOptions,
+                        headerLeft: (props) => <CustomBackButton {...props} />,
+                        headerTitleAlign: 'center',
+                    }}
+                    component={LessonQuestions}
+                />
+                <Stack.Screen
+                    name='ReviewExam'
+                    options={{
+                        tabBarIcon: { name: 'home', size: 24 },
+                        ...commonHeaderOptions,
+                    }}
+                    component={ReviewExam}
+                />
+            </Stack.Navigator>
     );
 };

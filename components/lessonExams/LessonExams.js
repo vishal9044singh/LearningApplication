@@ -3,13 +3,12 @@ import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react
 import { Dropdown } from 'react-native-element-dropdown';
 import { themeColors } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
-import { useAxiosWithToken } from '../../config/axiosConfig';
-import { showAlert } from '../UsefulAlerts';
+import { useAxiosWithTokenInternet } from '../../config/axiosConfig';
 import { getDateAndTime } from '../../utils/usefulFunctions';
 
 export default function LessonExams() {
     const navigation = useNavigation();
-    let axiosWithToken = useAxiosWithToken();
+    let axiosWithToken = useAxiosWithTokenInternet();
     const dummyData = [
         {
             id: 1,
@@ -175,7 +174,6 @@ export default function LessonExams() {
 };
 
 const styles = StyleSheet.create({
-    //for dropdown
     dropdown: {
         backgroundColor: 'white',
         elevation: 5,

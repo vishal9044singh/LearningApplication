@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image } from 'react-native';
 import { themeColors } from '../theme';
 import { StyleSheet } from 'react-native';
+import { InternetContextProvider } from '../context/internextContext';
 
 const notifications = [
     {
@@ -86,12 +87,14 @@ export default function NotificationsScreen() {
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: themeColors.bg }}>
             <View className="flex-1 rounded-t-3xl bg-white">
+                <InternetContextProvider>
                 <Text style={styles.heading}>Notifications</Text>
                 <FlatList
                     data={notificationData}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
                 />
+                </InternetContextProvider>
             </View>
         </View>
     );
