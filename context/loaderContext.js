@@ -1,5 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import { ActivityIndicator,View } from "react-native";
+import { themeColors } from "../theme";
 
 export const LoaderContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
@@ -20,7 +21,8 @@ export const LoaderContextProvider = ({ children }) => {
               zIndex: 5,
             }}
           >
-            <ActivityIndicator size="small" color="#0000ff" />
+            {/* <ActivityIndicator size="large" color={themeColors.bgBold}/> */}
+            <ActivityIndicator size="large" color={themeColors.bgBold}/>
           </View>
         )}
         {children}

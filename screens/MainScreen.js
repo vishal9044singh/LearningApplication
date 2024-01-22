@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
-import { View, TouchableOpacity, StatusBar } from "react-native";
+import { View, TouchableOpacity, StatusBar,Text,Image } from "react-native";
 import { UserContext } from "../context/userContext";
 import { themeColors } from "../theme";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+
+import homeIcon from '../assets/icons/homeIcon.png';
+import examIcon from '../assets/icons/examsIcon.png';
+import profileIcon from '../assets/icons/profileIcon.png';
+import moreIcon from '../assets/icons/moreIcon.png';
+import homeFocused from '../assets/icons/homeFocused.png';
+import examFocused from '../assets/icons/examFocused.png';
+import profileFocused from '../assets/icons/profileFocused.png';
+import moreFocused from '../assets/icons/moreFocused.png';
 import mainStyle from "../assets/css/mainStyle";
-import HomeScreen from "./HomeScreen";
 import ExamsScreen from "./ExamsScreen";
 import MoreScreen from "./MoreScreen";
 import LogoTitle from "../components/LogoTitle";
@@ -31,13 +38,19 @@ const commonHeaderOptions = {
 };
 
 const CustomTabBar = ({ state, descriptors, navigation }) => {
+
+  const iconMapping = {
+    Home: { default: homeIcon, focused: homeFocused },
+    Exams: { default: examIcon, focused: examFocused },
+    Profile: { default: profileIcon, focused: profileFocused },
+    More: { default: moreIcon, focused: moreFocused },
+  };
+
   return (
-    // <View style={mainStyle.tabBarContainer}>
     <View style={mainStyle.tabBar}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const isFocused = state.index === index;
-        const icon = options.tabBarIcon;
         const onPress = () => {
           const event = navigation.emit({
             type: 'tabPress',
@@ -48,7 +61,6 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             navigation.navigate(route.name);
           }
         };
-
         return (
           <TouchableOpacity
             key={index}
@@ -60,19 +72,22 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             onPress={onPress}
             style={mainStyle.tabItem}
           >
-            <Ionicons
-              name={icon.name}
-              size={icon.size}
-              color={isFocused ? '#2f95dc' : '#ccc'}
+            <Image
+              source={isFocused ? iconMapping[route.name].focused : iconMapping[route.name].default}
+              style={{
+                width: 35, 
+                height: 35,
+                resizeMode: 'contain', 
+              }}
             />
             {isFocused && <View style={mainStyle.activeTabIndicator} />}
           </TouchableOpacity>
         );
       })}
     </View>
-    //  </View> 
   );
 };
+
 
 export default function MainScreen() {
 
@@ -83,10 +98,10 @@ export default function MainScreen() {
         tabBar={(props) => <CustomTabBar {...props} />}
       >
         <Tab.Screen
-          name="HomeScreenStack"
+          name="Home"
           component={HomeScreenStack}
           options={{
-            tabBarIcon: { name: 'home', size: 24 },
+            tabBarIcon: { name: 'home', size: 20 },
             // ...commonHeaderOptions,
             headerShown:false
           }}
@@ -95,7 +110,7 @@ export default function MainScreen() {
           name="Exams"
           component={ExamsScreen}
           options={{
-            tabBarIcon: { name: 'home', size: 24 },
+            tabBarIcon: { name: 'home', size: 20 },
             ...commonHeaderOptions,
           }}
         />
@@ -103,7 +118,7 @@ export default function MainScreen() {
           name="Profile"
           component={ProfileScreen}
           options={{
-            tabBarIcon: { name: 'home', size: 24 },
+            tabBarIcon: { name: 'home', size: 20 },
             ...commonHeaderOptions,
           }}
         />
@@ -111,7 +126,7 @@ export default function MainScreen() {
           name="More"
           component={MoreScreen}
           options={{
-            tabBarIcon: { name: 'home', size: 24 },
+            tabBarIcon: { name: 'home', size: 20 },
             ...commonHeaderOptions,
           }}
         />

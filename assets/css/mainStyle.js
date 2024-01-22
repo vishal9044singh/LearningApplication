@@ -6,6 +6,7 @@ export default mainStyle = StyleSheet.create({
         backgroundColor: themeColors.bg, 
         position: 'relative',
         zIndex: 1, 
+        elevation:10
     },
     tabBar: {
         flexDirection: 'row',
@@ -23,12 +24,15 @@ export default mainStyle = StyleSheet.create({
     tabItem: {
         flex: 1,
         alignItems: 'center',
-        padding: 16,
+        padding: 10,
+        borderBottomWidth: 0.5,
+        borderBottomColor:'lightgrey'
     },
     activeTabIndicator: {
         height: 3,
-        width: '80%',
-        backgroundColor: 'red',
+        width: '60%',
+        borderRadius:10,
+        backgroundColor: themeColors.bg,
         position: 'absolute',
         top: 0,
     },
